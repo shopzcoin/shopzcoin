@@ -1,7 +1,7 @@
 
-TOA development tree
+Shopzcoin development tree
 
-TOA is a PoS-based cryptocurrency.
+Shopzcoin is a PoS-based cryptocurrency.
 
 Development process
 ===========================
