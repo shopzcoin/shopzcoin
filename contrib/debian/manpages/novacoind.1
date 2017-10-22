@@ -180,9 +180,9 @@ Returns a list of the last ['count'] transactions for 'account' - for all accoun
 Moves funds between accounts.
 .TP
 \fBsendfrom* <'account'> <'novacoinaddress'> <'amount'> ['minconf=1'] ['comment'] ['comment-to']\fR
-Sends amount from account's balance to 'novacoinaddress'. This method will fail if there is less than amount novacoins with ['minconf'] confirmations in the account's balance (unless account is the empty-string-named default account; it behaves like the *sendshopzcoinddress* method). Returns transaction ID on success.
+Sends amount from account's balance to 'novacoinaddress'. This method will fail if there is less than amount novacoins with ['minconf'] confirmations in the account's balance (unless account is the empty-string-named default account; it behaves like the *sendtoaddress* method). Returns transaction ID on success.
 .TP     
-\fBsendshopzcoinddress 'novacoinaddress' 'amount' ['comment'] ['comment-to']\fR
+\fBsendtoaddress 'novacoinaddress' 'amount' ['comment'] ['comment-to']\fR
 Sends amount from the server's available balance to 'novacoinaddress'. amount is a real and is rounded to the nearest 0.01. Returns transaction id on success.
 .TP    
 \fBstop\fR
