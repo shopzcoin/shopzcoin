@@ -1008,11 +1008,11 @@ int64_t GetProofOfWorkReward(int64_t nFees, int64_t nMoneySupply)
     {
         nSubsidy = 0;
     }
-    else if(nBestHeight >= 1 && nBestHeight <= 1400)
+    else if(nBestHeight >= 1 && nBestHeight <= 1000)
     {
-        nSubsidy = 1000000000 * COIN / 1000;
-    }else if(nBestHeight > 1000 && nMoneySupply < 1000000000 * COIN){
-        nSubsidy = (1000000000 * COIN) - nMoneySupply;
+        nSubsidy = 1500000000 * COIN / 1000;
+    }else if(nBestHeight > 1000 && nMoneySupply < 1500000000 * COIN){
+        nSubsidy = (1500000000 * COIN) - nMoneySupply;
     }
 
     if (fDebug && GetBoolArg("-printcreation"))
@@ -1024,7 +1024,12 @@ int64_t GetProofOfWorkReward(int64_t nFees, int64_t nMoneySupply)
 // miner's coin stake reward based on coin age spent (coin-days)
 int64_t GetProofOfStakeReward(int64_t nMoneySupply, int64_t nFees)
 {
-    return nFees;
+    int64_t nSubsidy = (nMoneySupply * 0.05) / 525600;
+
+    if (fDebug && GetBoolArg("-printcreation"))
+        printf("GetProofOfStakeReward(): create=%s nMoneySupply=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nMoneySupply);
+
+    return nSubsidy + nFees;
 }
 
 //
