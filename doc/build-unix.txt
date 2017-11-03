@@ -16,7 +16,7 @@ To Build
 cd src/
 make -f makefile.unix            # Headless shopzcoin
 
-See readme-qt.rst for instructions on building TOA QT,
+See readme-qt.rst for instructions on building Shopzcoin QT,
 the graphical shopzcoin.
 
 Dependencies
