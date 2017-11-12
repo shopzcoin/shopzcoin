@@ -1,9 +1,9 @@
-Building TOA
+Building Shopzcoin
 
-See doc/readme-qt.rst for instructions on building TOA QT,
+See doc/readme-qt.rst for instructions on building Shopzcoin QT,
 the intended-for-end-users, nice-graphical-interface, reference
-implementation of TOA.
+implementation of Shopzcoin.
 
 See doc/build-*.txt for instructions on building shopzcoind,
 the intended-for-services, no-graphical-interface, reference
-implementation of TOA.
+implementation of Shopzcoin.

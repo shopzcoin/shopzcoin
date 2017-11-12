@@ -1008,11 +1008,11 @@ int64_t GetProofOfWorkReward(int64_t nFees, int64_t nMoneySupply)
     {
         nSubsidy = 0;
     }
-    else if(nBestHeight >= 1 && nBestHeight <= 1400)
+    else if(nBestHeight >= 1 && nBestHeight <= 1000)
     {
-        nSubsidy = 1000000000 * COIN / 1000;
-    }else if(nBestHeight > 1000 && nMoneySupply < 1000000000 * COIN){
-        nSubsidy = (1000000000 * COIN) - nMoneySupply;
+        nSubsidy = 1500000000 * COIN / 1000;
+    }else if(nBestHeight > 1000 && nMoneySupply < 1500000000 * COIN){
+        nSubsidy = (1500000000 * COIN) - nMoneySupply;
     }
 
     if (fDebug && GetBoolArg("-printcreation"))
@@ -1024,7 +1024,12 @@ int64_t GetProofOfWorkReward(int64_t nFees, int64_t nMoneySupply)
 // miner's coin stake reward based on coin age spent (coin-days)
 int64_t GetProofOfStakeReward(int64_t nMoneySupply, int64_t nFees)
 {
-    return nFees;
+    int64_t nSubsidy = (nMoneySupply * 0.05) / 525600;
+
+    if (fDebug && GetBoolArg("-printcreation"))
+        printf("GetProofOfStakeReward(): create=%s nMoneySupply=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nMoneySupply);
+
+    return nSubsidy + nFees;
 }
 
 //
@@ -2524,25 +2529,23 @@ bool LoadBlockIndex(bool fAllowNew)
         if (!fAllowNew)
             return false;
 
-        // Genesis block
 
-        // MainNet:
-
-        /*
-        CBlock(hash=00000577c37d3e8305124983475819c74a86505b2c7dba2b5f277931224f3a44, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=66f5caf24304992b2f21f750e135800a11e68bb4e79f0970196bd6c355c6061d, nTime=1505686900, nBits=1e0fffff, nNonce=6547866, vtx=1, vchBlockSig=)
-          Coinbase(hash=66f5caf243, nTime=1505686900, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-            CTxIn(COutPoint(0000000000, 4294967295), coinbase 00012a3e4269747374616d7020746f20496e74726f6475636520426974636f696e20436173682054726164696e6720627920456e64206f6620746865204d6f6e7468)
+       // Genesis block
+       // MainNet:
+		/* CBlock(hash=00000e1da5745cd056577c218fa240e413f80283e04b4984c86114ced35c4ef7, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=2142d3b2c70d88ba13b893c934fafd2cbda9cdf78f58a02c5c3d8b93edea8b97, nTime=1510053026, nBits=1e0fffff, nNonce=6804635, vtx=1, vchBlockSig=)
+          Coinbase(hash=2142d3b2c7, nTime=1510053026, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+            CTxIn(COutPoint(0000000000, 4294967295), coinbase 00012a41426f73746f6e20466564204f6666696369616c3a20426c6f636b636861696e2043616e2046756e64616d656e74616c6c79204368616e6765205061796d656e7473)
             CTxOut(empty)
-          vMerkleTree: 66f5caf243
-        block.GetHash() == 00000577c37d3e8305124983475819c74a86505b2c7dba2b5f277931224f3a44
-        block.hashMerkleRoot == 66f5caf24304992b2f21f750e135800a11e68bb4e79f0970196bd6c355c6061d
-        block.nTime = 1505686900
-        block.nNonce = 6547866
-        */
+          vMerkleTree: 2142d3b2c7
+        block.GetHash() == 00000e1da5745cd056577c218fa240e413f80283e04b4984c86114ced35c4ef7
+        block.hashMerkleRoot == 2142d3b2c70d88ba13b893c934fafd2cbda9cdf78f58a02c5c3d8b93edea8b97
+        block.nTime = 1510053026
+        block.nNonce = 6804635
+		*/
 
-        const char* pszTimestamp = "Bitstamp to Introduce Bitcoin Cash Trading by End of the Month";
+        const char* pszTimestamp = "Boston Fed Official: Blockchain Can Fundamentally Change Payments";
         CTransaction txNew;
-        txNew.nTime = 1505686900;
+        txNew.nTime = 1510053026;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2552,10 +2555,10 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1505686900;
+        block.nTime    = 1510053026;
         block.nBits    = 0x1e0fffff;
         block.nNonce   = 6547866;
-        
+
         if (true  && (block.GetHash() != hashGenesisBlock)) {
 
                 // This will figure out a valid hash and Nonce if you're
@@ -2580,7 +2583,7 @@ bool LoadBlockIndex(bool fAllowNew)
         printf("block.nTime = %u \n", block.nTime);
         printf("block.nNonce = %u \n", block.nNonce);
                 
-        assert(block.hashMerkleRoot == uint256("0x66f5caf24304992b2f21f750e135800a11e68bb4e79f0970196bd6c355c6061d"));
+        assert(block.hashMerkleRoot == uint256("0x2142d3b2c70d88ba13b893c934fafd2cbda9cdf78f58a02c5c3d8b93edea8b97"));
         assert(block.GetHash() == (!fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet));
         assert(block.CheckBlock());
 

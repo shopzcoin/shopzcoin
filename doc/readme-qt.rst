@@ -1,4 +1,4 @@
-TOA-qt: Qt5 GUI for TOA
+Shopzcoin-qt: Qt5 GUI for Shopzcoin
 ===============================
 
 Build instructions
@@ -117,9 +117,9 @@ flag to qmake to control this:
 Berkely DB version warning
 ==========================
 
-A warning for people using the *static binary* version of TOA on a Linux/UNIX-ish system (tl;dr: **Berkely DB databases are not forward compatible**).
+A warning for people using the *static binary* version of Shopzcoin on a Linux/UNIX-ish system (tl;dr: **Berkely DB databases are not forward compatible**).
 
-The static binary version of TOA is linked against libdb 5.0 (see also `this Debian issue`_).
+The static binary version of Shopzcoin is linked against libdb 5.0 (see also `this Debian issue`_).
 
 Now the nasty thing is that databases from 5.X are not compatible with 4.X.
 
